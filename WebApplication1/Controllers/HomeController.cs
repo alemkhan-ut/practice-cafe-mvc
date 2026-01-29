@@ -12,7 +12,6 @@ namespace WebApplication1.Controllers
         public HomeController(ILogger<HomeController> logger, ApplicationContext context)
         {
             _logger = logger;
-
             db = context;
         }
 
@@ -28,7 +27,7 @@ namespace WebApplication1.Controllers
 
         public IActionResult Menu()
         {
-            return View();
+            return View(db.Products.ToList());
         }
 
         public IActionResult Contacts()

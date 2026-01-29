@@ -1,10 +1,14 @@
-﻿@{
+﻿@model List<Product>
+
+@{
     ViewData["Title"] = "Меню";
 }
 
 <section class="menu">
     <h2>Наше меню</h2>
-    <div class="menu-item">☕ Эспрессо — 800 ₸</div>
-    <div class="menu-item">☕ Капучино — 1000 ₸</div>
-    <div class="menu-item">☕ Латте — 1100 ₸</div>
+
+    @foreach (var product in Model)
+    {
+        <div class="menu-item">☕ @product.Name — @product.Price ₸</div>
+    }
 </section>

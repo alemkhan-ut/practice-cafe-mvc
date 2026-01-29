@@ -1,0 +1,72 @@
+﻿body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f2ee;
+    color: #333;
+}
+
+header {
+    background-color: #3e2723;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+nav a {
+    color: #ffccbc;
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.hero {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+    .hero h1 {
+        margin-bottom: 10px;
+    }
+
+    .hero p {
+        font-size: 18px;
+    }
+
+.menu {
+    background-color: #fff;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+    .menu h2 {
+        margin-bottom: 20px;
+    }
+
+.menu-item {
+    margin-bottom: 10px;
+}
+
+footer {
+    background-color: #3e2723;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-size: 14px;
+}
+
+.contacts {
+    padding: 40px 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+}
+
+    .contacts h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+.contact-item {
+    margin-bottom: 15px;
+    font-size: 16px;
+}

@@ -6,6 +6,7 @@ namespace WebApplication1.Models
     {
         public DbSet<Product> Products { get; set; }
         public DbSet<Contact> Contacts { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)

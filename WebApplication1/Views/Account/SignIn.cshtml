@@ -1,0 +1,20 @@
+﻿@model User
+
+<h2>Регистрация</h2>
+<form asp-action="SignIn" asp-controller="Account">
+    <p>
+        <label asp-for="Login">Логин</label><br />
+        <input type="text" asp-for="Login" />
+    </p>
+    <p>
+        <label asp-for="Password">Пароль</label><br />
+        <input type="text" asp-for="Password" />
+    </p>
+    <p>
+        <label asp-for="BirthDate">Дата рождения</label><br />
+        <input type="date" asp-for="BirthDate" />
+    </p>
+    <p>
+        <input type="submit" value="ОК" />
+    </p>
+</form>

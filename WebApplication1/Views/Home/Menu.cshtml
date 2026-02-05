@@ -9,6 +9,13 @@
 
     @foreach (var product in Model)
     {
+        if (!product.IsActive)
+        {
+            continue;
+        }
+
         <div class="menu-item">☕ @product.Name — @product.Price ₸</div>
+        <div>@product.Description</div>
+        <br/>
     }
 </section>

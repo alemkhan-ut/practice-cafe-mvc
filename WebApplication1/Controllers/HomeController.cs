@@ -32,7 +32,7 @@ namespace WebApplication1.Controllers
 
         public IActionResult Contacts()
         {
-            return View();
+            return View(db.Contacts.ToList());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

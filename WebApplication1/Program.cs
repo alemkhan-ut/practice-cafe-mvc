@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Models;
 
@@ -8,6 +9,10 @@ builder.Services.AddControllersWithViews();
 
 // получаем строку подключения из файла конфигурации
 string connection = builder.Configuration.GetConnectionString("DefaultConnection");
+
+// Авторизиция и аутентификация
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
+builder.Services.AddAuthorization();
 
 // добавляем контекст ApplicationContext в качестве сервиса в приложение
 builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connection));
@@ -27,6 +32,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Models;
 
@@ -25,6 +26,7 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult Menu()
         {
             return View(db.Products.ToList());

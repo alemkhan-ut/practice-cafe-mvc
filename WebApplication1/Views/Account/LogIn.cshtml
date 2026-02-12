@@ -1,0 +1,17 @@
+﻿@model User
+
+<h2>Авторизация</h2>
+
+<form asp-action="LogIn" asp-controller="Account">
+    <p>
+        <label asp-for="Login">Логин</label><br />
+        <input type="text" asp-for="Login" />
+    </p>
+    <p>
+        <label asp-for="Password">Пароль</label><br />
+        <input type="text" asp-for="Password" />
+    </p>
+    <p>
+        <input type="submit" value="ОК" />
+    </p>
+</form>

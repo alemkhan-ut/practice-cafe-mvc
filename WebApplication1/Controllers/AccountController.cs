@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
@@ -13,16 +9,24 @@ namespace WebApplication1.Controllers
     {
         private ApplicationContext _dbContext;
 
-        public AccountController(ApplicationContext context, HttpContext httpContext)
+        public AccountController(ApplicationContext context)
         {
             _dbContext = context;
         }
 
+        [HttpGet]
+        public IActionResult ChoTakoe()
+        {
+            return BadRequest("Ты что тут делаешь????");
+        }
+        
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
-
+        
+        [HttpGet]
         public IActionResult SignIn()
         {
             return View();
@@ -36,7 +40,7 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult LogIn()
+        public IActionResult Login()
         {
             return View();
         }
@@ -44,17 +48,18 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public async Task<IActionResult> LogIn(User user)
         {
+            // Ищем пользователя в базе данных по логину
             User currentUser = _dbContext.Users.FirstOrDefault(u => u.Login == user.Login);
 
             if (currentUser == null)
             {
-                return (IActionResult)Results.NotFound("Пользователь не найден");
+                return NotFound("Пользователь не найден");
             }
             else
             {
                 if (currentUser.Password != user.Password)
                 {
-                    return (IActionResult)Results.BadRequest("Неверный пароль");
+                    return BadRequest("Неверный пароль");
                 }
 
                 var claims = new List<Claim>

@@ -16,12 +16,17 @@
             <a asp-controller="Home" asp-action="Menu">Меню</a>
             <a asp-controller="Home" asp-action="Contacts">Контакты</a>
 
-            <a asp-controller="Account" asp-action="LogIn">
-                Войти
-            </a>
-            <a asp-controller="Account" asp-action="SignIn">
-                Регистрация
-            </a>
+            @{
+                if (!User.Identity.IsAuthenticated)
+                {
+                    <a asp-controller="Account" asp-action="LogIn">Войти</a>
+                    <a asp-controller="Account" asp-action="SignIn">Регистрация</a>
+                }
+                else
+                {
+                    
+                }
+            }
         </nav>
     </header>
 

@@ -19,13 +19,13 @@ namespace WebApplication1.Controllers
         {
             return BadRequest("Ты что тут делаешь????");
         }
-        
+
         [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
-        
+
         [HttpGet]
         public IActionResult SignIn()
         {
@@ -37,6 +37,9 @@ namespace WebApplication1.Controllers
         {
             _dbContext.Users.Add(user);
             await _dbContext.SaveChangesAsync();
+
+            await LoginProcessAsync(user);
+
             return RedirectToAction("Index", "Home");
         }
 
@@ -62,17 +65,30 @@ namespace WebApplication1.Controllers
                     return BadRequest("Неверный пароль");
                 }
 
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name, currentUser.Login),
-                };
-                var claimsIdentity = new ClaimsIdentity("BlackCat");
-                var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
-
-                await HttpContext.SignInAsync(claimsPrincipal);
+                await LoginProcessAsync(currentUser);
 
                 return RedirectToAction("Index", "Home");
             }
+        }
+
+        public async Task<IActionResult> LogOut()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
+        public async Task LoginProcessAsync(User user)
+        {
+            var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, user.Login),
+                    new Claim(ClaimTypes.DateOfBirth, user.BirthDate.ToString("dd.MM.yyyy"))
+                };
+
+            var claimsIdentity = new ClaimsIdentity(claims, "Cookies");
+            var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+
+            await HttpContext.SignInAsync(claimsPrincipal);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -24,7 +26,12 @@
                 }
                 else
                 {
-                    
+                    // User - текущий пользователь
+                    // FindFirst - найти первое совпадение
+                    // ClaimsIdentity.DefaultNameClaimType - тип данных, который содержит имя пользователя
+
+                    <text>Привет, @User.FindFirst(ClaimTypes.Name).Value [@User.FindFirst(ClaimTypes.DateOfBirth).Value]</text>
+                    <a asp-controller="Account" asp-action="LogOut">Выйти</a>
                 }
             }
         </nav>

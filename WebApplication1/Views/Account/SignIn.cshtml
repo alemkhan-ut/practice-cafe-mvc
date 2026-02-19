@@ -1,6 +1,11 @@
 ﻿@model User
 
 <h2>Регистрация</h2>
+@if (ViewData["ErrorMessage"] != null)
+{
+    <p style="color: red">@ViewData["ErrorMessage"]</p>
+}
+
 <form asp-action="SignIn" asp-controller="Account">
     <p>
         <label asp-for="Login">Логин</label><br />
@@ -8,7 +13,7 @@
     </p>
     <p>
         <label asp-for="Password">Пароль</label><br />
-        <input type="text" asp-for="Password" />
+        <input type="password" asp-for="Password" />
     </p>
     <p>
         <label asp-for="BirthDate">Дата рождения</label><br />

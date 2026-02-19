@@ -1,0 +1,13 @@
+﻿@model User
+
+<h2>Мой профиль</h2>
+
+<p>
+    <strong>Логин:</strong> 
+    @Model.Login
+</p>
+
+<p>
+    <strong>Дата рождения:</strong> 
+    @Model.BirthDate.ToShortDateString()
+</p>

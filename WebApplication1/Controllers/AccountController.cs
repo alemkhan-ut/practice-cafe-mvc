@@ -27,6 +27,12 @@ namespace WebApplication1.Controllers
         }
 
         [HttpGet]
+        public IActionResult MyProfile()
+        {
+            return View(GetCurrentUser(HttpContext.User.Identity.Name));
+        }
+
+        [HttpGet]
         public IActionResult SignIn()
         {
             return View();
@@ -35,6 +41,17 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public async Task<IActionResult> SignIn(User user)
         {
+            if (string.IsNullOrEmpty(user.Login) || string.IsNullOrEmpty(user.Password))
+                return BadRequest("Логин и пароль не могут быть пустыми");
+
+            if (_dbContext.Users.FirstOrDefault(u => u.Login == user.Login) != null)
+            {
+                string errorMessage = "Пользователь с таким логином уже существует";
+
+                ViewData["ErrorMessage"] = errorMessage;
+                return View();
+            }
+
             _dbContext.Users.Add(user);
             await _dbContext.SaveChangesAsync();
 
@@ -52,7 +69,7 @@ namespace WebApplication1.Controllers
         public async Task<IActionResult> LogIn(User user)
         {
             // Ищем пользователя в базе данных по логину
-            User currentUser = _dbContext.Users.FirstOrDefault(u => u.Login == user.Login);
+            User currentUser = GetCurrentUser(user.Login);
 
             if (currentUser == null)
             {
@@ -69,6 +86,11 @@ namespace WebApplication1.Controllers
 
                 return RedirectToAction("Index", "Home");
             }
+        }
+
+        private User? GetCurrentUser(string login)
+        {
+            return _dbContext.Users.FirstOrDefault(u => u.Login == login);
         }
 
         public async Task<IActionResult> LogOut()

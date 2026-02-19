@@ -30,7 +30,12 @@
                     // FindFirst - найти первое совпадение
                     // ClaimsIdentity.DefaultNameClaimType - тип данных, который содержит имя пользователя
 
-                    <text>Привет, @User.FindFirst(ClaimTypes.Name).Value [@User.FindFirst(ClaimTypes.DateOfBirth).Value]</text>
+                    string name = @User.FindFirst(ClaimTypes.Name).Value;
+                    string dateOfBirth = @User.FindFirst(ClaimTypes.DateOfBirth).Value;
+
+                    <text>Привет, <a style="all:unset" 
+                    asp-controller="Account" 
+                    asp-action="MyProfile">@name</a> [@dateOfBirth]</text>
                     <a asp-controller="Account" asp-action="LogOut">Выйти</a>
                 }
             }
